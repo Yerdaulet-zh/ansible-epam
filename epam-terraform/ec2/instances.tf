@@ -1,5 +1,5 @@
-resource "aws_instance" "nginx" {
-  count         = 2
+resource "aws_instance" "ansible" {
+  count         = 3
   ami           = local.ami
   instance_type = "t3.micro"
 
@@ -9,11 +9,6 @@ resource "aws_instance" "nginx" {
   user_data = <<-EOF
               #!/bin/bash
               sudo apt update && sudo apt upgrade -y
-              sudo apt install nginx
-              sudo systemctl start nginx
-              sudo systemctl restart nginx
-              
-              echo "<h1>Hello from $(hostname)</h1>" | sudo tee /var/www/html/index.html
               EOF
 
   tags = {
