@@ -12,6 +12,6 @@ resource "aws_instance" "ansible" {
               EOF
 
   tags = {
-    Name = "Nginx-Server-${count.index + 1}"
+    Name = "Server-${count.index + 1}"
   }
 }
