@@ -1,0 +1,4 @@
+---
+- name: reboot_node
+  reboot:
+    msg: "Rebooting to apply SELinux changes"
