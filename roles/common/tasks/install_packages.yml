@@ -1,0 +1,7 @@
+---
+- name: Install required packages
+  apt:
+    name: "{{ required_packages }}"
+    state: present
+    update_cache: yes
+  when: install_required_packages | bool
