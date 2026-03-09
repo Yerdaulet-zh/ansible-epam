@@ -1,5 +1,5 @@
 resource "aws_instance" "ansible" {
-  count         = 3
+  count         = 2
   ami           = local.ami
   instance_type = "t3.micro"
   key_name      = local.ssh_key_name
