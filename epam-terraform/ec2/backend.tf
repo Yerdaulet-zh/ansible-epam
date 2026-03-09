@@ -1,10 +1,10 @@
 terraform {
   backend "s3" {
-    bucket       = "aws-terrafrom-states"
-    key          = "epam-terraform-practical-task/EC2/terraform.tfstate"
-    region       = "eu-south-1"
+    bucket       = "aws-terrafrom-states-files"
+    key          = "epam-ansible-practical-task/EC2/terraform.tfstate"
+    region       = "eu-central-1"
     encrypt      = true
     use_lockfile = true
-    profile      = "default"
+    profile      = "second"
   }
 }
