@@ -1,0 +1,6 @@
+---
+- name: Manage Collectd Service
+  hosts: managed_nodes
+  become: true
+  roles:
+    - collectd
