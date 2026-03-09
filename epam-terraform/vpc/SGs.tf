@@ -1,12 +1,12 @@
 resource "aws_security_group" "instance_sg" {
-  name        = "instance-sg"
-  vpc_id      = aws_vpc.vpc.id
+  name   = "instance-sg"
+  vpc_id = aws_vpc.vpc.id
 
   ingress {
-    from_port       = 80
-    to_port         = 80
-    protocol        = "tcp"
-    cidr_blocks     = ["0.0.0.0/0"]
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
@@ -25,6 +25,6 @@ resource "aws_security_group" "instance_sg" {
 }
 
 output "sg_id" {
-  value = aws_security_group.instance_sg.id
+  value     = aws_security_group.instance_sg.id
   sensitive = true
 }
