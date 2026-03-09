@@ -1,0 +1,6 @@
+---
+- name: Include package installation tasks
+  include_tasks: install_packages.yml
+
+- name: Include SELinux configuration tasks
+  include_tasks: selinux.yml
