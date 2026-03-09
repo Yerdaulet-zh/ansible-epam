@@ -1,0 +1,9 @@
+---
+- name: Run Common Configuration Role
+  hosts: managed_nodes
+  become: true
+  vars:
+    install_required_packages: true
+    disable_selinux_control: true
+  roles:
+    - common
