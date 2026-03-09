@@ -5,7 +5,7 @@ resource "aws_instance" "ansible" {
   key_name      = aws_key_pair.deployer
 
   subnet_id              = data.terraform_remote_state.network.outputs.public_subnet_id
-  vpc_security_group_ids = [data.terraform_remote_state.network.outputs.nginx_sg_id]
+  vpc_security_group_ids = [data.terraform_remote_state.network.outputs.sg_id]
 
   user_data = <<-EOF
               #!/bin/bash
