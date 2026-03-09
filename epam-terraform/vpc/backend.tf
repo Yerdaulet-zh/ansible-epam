@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket       = "aws-ansible-states"
+    bucket       = "aws-terrafrom-states-files"
     key          = "epam-ansible-practical-task/VPC/terraform.tfstate"
     region       = "eu-central-1"
     encrypt      = true
