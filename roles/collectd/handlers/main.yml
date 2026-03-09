@@ -1,0 +1,5 @@
+---
+- name: restart_collectd
+  service:
+    name: collectd
+    state: restarted
