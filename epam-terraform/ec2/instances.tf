@@ -2,7 +2,7 @@ resource "aws_instance" "ansible" {
   count         = 3
   ami           = local.ami
   instance_type = "t3.micro"
-  key_name      = aws_key_pair.name
+  key_name      = aws_key_pair.deployer.key_name
 
   subnet_id              = data.terraform_remote_state.network.outputs.public_subnet_id
   vpc_security_group_ids = [data.terraform_remote_state.network.outputs.sg_id]
