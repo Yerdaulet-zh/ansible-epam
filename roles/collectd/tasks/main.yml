@@ -1,0 +1,53 @@
+---
+- name: Manage collectd Installation
+  when: collectd_state == 'present'
+  block:
+    - name: Install collectd and prometheus plugin
+      apt:
+        name:
+          - collectd
+          - collectd-core
+        state: latest
+        update_cache: yes
+
+    - name: Ensure config directory exists
+      file:
+        path: /etc/collectd/collectd.conf.d
+        state: directory
+        mode: '0755'
+
+    - name: Deploy prometheus exporter config
+      template:
+        src: prometheus.conf.j2
+        dest: /etc/collectd/collectd.conf.d/prometheus.conf
+      notify: restart_collectd
+
+    - name: Ensure collectd is started and enabled
+      service:
+        name: collectd
+        state: started
+        enabled: yes
+
+- name: Manage collectd Removal
+  when: collectd_state == 'absent'
+  block:
+    - name: Stop collectd service
+      service:
+        name: collectd
+        state: stopped
+        enabled: no
+      ignore_errors: true
+
+    - name: Remove collectd packages
+      apt:
+        name: ["collectd", "collectd-core"]
+        state: absent
+        purge: yes
+
+    - name: Remove config files
+      file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - /etc/collectd/collectd.conf.d/prometheus.conf
+        - /etc/collectd/
