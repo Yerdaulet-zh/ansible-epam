@@ -1,13 +1,19 @@
 ---
-- name: Disable SELinux
+- name: Disable SELinux (RedHat/CentOS only)
   selinux:
     state: disabled
   register: selinux_status
-  when: disable_selinux_control | bool
+  # OS family check to prevent failure on Ubuntu
+  when:
+    - disable_selinux_control | bool
+    - ansible_os_family == "RedHat"
 
 - name: Notify reboot if SELinux was changed
   debug:
     msg: "SELinux state changed, triggering reboot..."
   changed_when: selinux_status.changed
   notify: reboot_node
-  when: disable_selinux_control | bool
+  when:
+    - disable_selinux_control | bool
+    - selinux_status is defined
+    - selinux_status.changed
